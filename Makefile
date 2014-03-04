@@ -54,10 +54,7 @@ qemudbg: unit_test.c unit_test.h
 	$(MAKE) main.bin DEBUG_FLAGS=-DDEBUG
 	$(QEMU_STM32) -nographic -M stm32-p103 \
 		-gdb tcp::3333 -S \
-		-serial stdio \
-		-kernel main.bin -monitor null &
-	$(CROSS_COMPILE)gdb -x qemudbg_init.in
-	pkill -9 $(notdir $(QEMU_STM32))
+		-kernel main.bin
 
 qemu_remote: main.bin $(QEMU_STM32)
 	$(QEMU_STM32) -nographic -M stm32-p103 -kernel main.bin -vnc :1
