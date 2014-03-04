@@ -87,28 +87,39 @@ test: unit_test.c unit_test.h
 	$(QEMU_STM32) -nographic -M stm32-p103 \
 		-gdb tcp::3333 -S \
 		-serial stdio \
-		-kernel main.bin -monitor null &
+		-kernel main.bin -monitor null >/dev/null &
+	@echo
 	$(CROSS_COMPILE)gdb -batch -x test-strlen.in
-	mv -f gdb.txt test-strlen.txt
+	@mv -f gdb.txt test-strlen.txt
+	@echo
 	$(CROSS_COMPILE)gdb -batch -x test-strcpy.in
-	mv -f gdb.txt test-strcpy.txt
+	@mv -f gdb.txt test-strcpy.txt
+	@echo
 	$(CROSS_COMPILE)gdb -batch -x test-strcmp.in
-	mv -f gdb.txt test-strcmp.txt
+	@mv -f gdb.txt test-strcmp.txt
+	@echo
 	$(CROSS_COMPILE)gdb -batch -x test-strncmp.in
-	mv -f gdb.txt test-strncmp.txt
+	@mv -f gdb.txt test-strncmp.txt
+	@echo
 	$(CROSS_COMPILE)gdb -batch -x test-cmdtok.in
-	mv -f gdb.txt test-cmdtok.txt
+	@mv -f gdb.txt test-cmdtok.txt
+	@echo
 	$(CROSS_COMPILE)gdb -batch -x test-itoa.in
-	mv -f gdb.txt test-itoa.txt
+	@mv -f gdb.txt test-itoa.txt
+	@echo
 	$(CROSS_COMPILE)gdb -batch -x test-find_events.in
-	mv -f gdb.txt test-find_events.txt
+	@mv -f gdb.txt test-find_events.txt
+	@echo
 	$(CROSS_COMPILE)gdb -batch -x test-find_envvar.in
-	mv -f gdb.txt test-find_envvar.txt
+	@mv -f gdb.txt test-find_envvar.txt
+	@echo
 	$(CROSS_COMPILE)gdb -batch -x test-fill_arg.in
-	mv -f gdb.txt test-fill_arg.txt
+	@mv -f gdb.txt test-fill_arg.txt
+	@echo
 	$(CROSS_COMPILE)gdb -batch -x test-export_envvar.in
-	mv -f gdb.txt test-export_envvar.txt
-	pkill -9 $(notdir $(QEMU_STM32))
+	@mv -f gdb.txt test-export_envvar.txt
+	@echo
+	@pkill -9 $(notdir $(QEMU_STM32))
 
 clean:
 	rm -f *.elf *.bin *.list test-*.txt
