@@ -79,9 +79,6 @@ qemudbg_remote_bg: main.bin $(QEMU_STM32)
 		-kernel main.bin \
 		-vnc :1 &
 
-emu: main.bin
-	bash emulate.sh main.bin
-
 check: unit_test.c unit_test.h
 	$(MAKE) main.bin DEBUG_FLAGS=-DDEBUG
 	$(QEMU_STM32) -nographic -M stm32-p103 \
