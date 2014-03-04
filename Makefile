@@ -82,7 +82,7 @@ qemudbg_remote_bg: main.bin $(QEMU_STM32)
 emu: main.bin
 	bash emulate.sh main.bin
 
-test: unit_test.c unit_test.h
+check: unit_test.c unit_test.h
 	$(MAKE) main.bin DEBUG_FLAGS=-DDEBUG
 	$(QEMU_STM32) -nographic -M stm32-p103 \
 		-gdb tcp::3333 -S \
